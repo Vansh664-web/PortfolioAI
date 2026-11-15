@@ -1,0 +1,6 @@
+ALTER TABLE "Project"
+  ADD COLUMN "category" TEXT,
+  ADD COLUMN "imageUrl" TEXT,
+  ADD COLUMN "duration" TEXT,
+  ADD COLUMN "teamMembers" TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
+  ADD COLUMN "keyResults" TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[];

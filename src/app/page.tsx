@@ -1,69 +1,11 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Sparkles, WandSparkles, Layers3, ChartNoAxesCombined } from "lucide-react";
 
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+  return <main className="landing">
+    <nav className="landing-nav"><Link href="/" className="brand"><span className="brand-mark"><Sparkles size={16}/></span> portfolio<span className="brand-ai">ai</span></Link><div className="landing-links"><a href="#features">Product</a><a href="#how">How it works</a><a href="#stories">Stories</a></div><div className="nav-actions"><Link className="text-link" href="/dashboard">Log in</Link><Link className="button button-primary" href="/dashboard">Get started <ArrowRight size={15}/></Link></div></nav>
+    <section className="hero"><div className="hero-glow"/><div className="eyebrow"><span className="pulse-dot"/> YOUR NEXT CHAPTER STARTS HERE</div><h1>Your work deserves<br/>a <span>better story.</span></h1><p className="hero-copy">Build a portfolio that opens doors. PortfolioAI turns your experience into a compelling presence, with a little help from AI that gets your ambition.</p><div className="hero-cta"><Link className="button button-primary button-large" href="/dashboard">Build your portfolio <ArrowRight size={17}/></Link><a className="button button-quiet button-large" href="#features"><span className="play">↗</span> Explore the platform</a></div><div className="hero-proof"><div className="avatar-stack"><i>J</i><i>M</i><i>A</i><i>+</i></div><span>Made for people going places</span><span className="proof-sep">·</span><span>Thoughtfully AI-powered</span></div><div className="preview-window"><div className="preview-top"><div className="window-dots"><i/><i/><i/></div><span>portfolioai.app / overview</span><div className="preview-live"><i/> LIVE PREVIEW</div></div><div className="preview-content"><aside className="preview-side"><div className="mini-brand"><span className="brand-mark"><Sparkles size={12}/></span> portfolio<span className="brand-ai">ai</span></div>{["Overview","My portfolio","AI assistant","Theme studio","Projects"].map((s,i)=><div key={s} className={`mini-nav ${i===0?"selected":""}`}><span>{["◫","▧","✳","◈","□"][i]}</span>{s}</div>)}</aside><div className="preview-main"><div className="preview-greeting">MONDAY, OCTOBER 21, 2025</div><h3>Good morning, Alex <span>✳</span></h3><p>Small steps make a standout portfolio.</p><div className="preview-cards"><div className="preview-card completion"><div className="card-label">PORTFOLIO COMPLETION</div><div className="ring"><b>78<span>%</span></b></div><small>Looking good. Keep going.</small></div><div className="preview-card"><div className="card-label">PORTFOLIO VIEWS <span>↗ 18.6%</span></div><h2>2,840</h2><div className="sparkline">▁▂▁▃▂▄▃▅▄▆▄▇▆</div><small>vs. last month</small></div><div className="preview-card score"><div className="card-label">PORTFOLIO SCORE</div><div className="score-num">84<span>/100</span></div><small><span>↑ 6 points</span> this month</small></div></div><div className="preview-bottom"><div className="preview-card wide"><div className="card-label">YOUR VISIBILITY <span>Last 7 days⌄</span></div><div className="chart-bars">{[35,54,42,72,60,82,62,93,73,85,64,100,80,89,65,97,74,86,100,71,95,78,88,66].map((h,i)=><i key={i} style={{height:`${h}%`}}/>)}</div></div><div className="preview-card insight"><div className="insight-icon"><WandSparkles size={16}/></div><b>A little nudge</b><p>Adding a case study could help you stand out to recruiters.</p><a href="/dashboard">See your next steps ↗</a></div></div></div></div></div></section>
+    <section id="features" className="features-section"><div className="section-kicker">A BETTER WAY TO SHOW UP</div><h2>Everything you need.<br/><span>All in one thoughtful place.</span></h2><div className="feature-grid"><article><div className="feature-icon lilac"><Layers3/></div><h3>A portfolio that feels like you</h3><p>Bring your work together in a polished, personal space that makes a lasting first impression.</p></article><article><div className="feature-icon mint"><WandSparkles/></div><h3>Your own AI creative partner</h3><p>Find the right words, sharpen your story, and get unstuck with guidance built around your goals.</p></article><article><div className="feature-icon blue"><ChartNoAxesCombined/></div><h3>See what’s working</h3><p>Understand who’s finding your work and what to do next, with clear insights that make sense.</p></article></div></section>
+    <section id="how" className="bottom-cta"><div className="section-kicker">YOUR STORY, IN YOUR HANDS</div><h2>Make your next move<br/><span>your best one yet.</span></h2><Link className="button button-primary button-large" href="/dashboard">Start building for free <ArrowRight size={16}/></Link><small>No credit card. Just a fresh start.</small></section><footer><Link href="/" className="brand"><span className="brand-mark"><Sparkles size={14}/></span> portfolio<span className="brand-ai">ai</span></Link><span>© 2025 PortfolioAI · Made for what’s next.</span><div><a href="#features">Product</a><Link href="/dashboard">Dashboard</Link></div></footer>
+  </main>
 }

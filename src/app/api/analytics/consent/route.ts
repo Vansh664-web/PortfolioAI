@@ -1,0 +1,4 @@
+import { NextResponse } from "next/server";
+import { randomBytes } from "node:crypto";
+import { cookies } from "next/headers";
+export async function POST(req:Request){try{const {allow}=await req.json();if(typeof allow!=="boolean")return NextResponse.json({error:"Invalid consent choice."},{status:400});const jar=await cookies();jar.set("portfolio_analytics_consent",allow?"yes":"no",{httpOnly:true,sameSite:"lax",secure:process.env.NODE_ENV==="production",path:"/",maxAge:60*60*24*180});if(allow&&!jar.get("portfolio_visitor")?.value)jar.set("portfolio_visitor",randomBytes(24).toString("base64url"),{httpOnly:true,sameSite:"lax",secure:process.env.NODE_ENV==="production",path:"/",maxAge:60*60*24*365});return NextResponse.json({ok:true})}catch{return NextResponse.json({error:"Could not save your privacy choice."},{status:400})}}

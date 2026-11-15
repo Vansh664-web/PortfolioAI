@@ -1,0 +1,9 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { cookies } from "next/headers";
+import { db } from "@/lib/db";
+import PublicPortfolio from "@/components/PublicPortfolio";
+import "./public.css";
+async function getPortfolio(slug:string){return db.portfolio.findFirst({where:{slug,publishedAt:{not:null}},include:{sections:{where:{visible:true},orderBy:{position:"asc"}},theme:true}})}
+export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{const {slug}=await params;const portfolio=await getPortfolio(slug);if(!portfolio)return {title:"Portfolio not found"};return {title:portfolio.seoTitle||portfolio.headline||"Portfolio",description:portfolio.seoDescription||portfolio.about||"A professional portfolio.",openGraph:{title:portfolio.seoTitle||portfolio.headline||"Portfolio",description:portfolio.seoDescription||portfolio.about||"A professional portfolio.",images:portfolio.ogImage?[portfolio.ogImage]:[]}}}
+export default async function Page({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const portfolio=await getPortfolio(slug);if(!portfolio)notFound();const jar=await cookies();const theme=portfolio.theme?.settings as Record<string,any>|null;const custom=theme?.customization as Record<string,any>|undefined;const palette=custom?.colors||{};const name=(portfolio.sections.find(s=>s.kind==="hero")?.content as any)?.heading||portfolio.seoTitle||"Portfolio";return <PublicPortfolio slug={slug} name={name} sections={portfolio.sections.map(s=>({id:s.id,kind:s.kind,title:s.title,content:s.content as Record<string,any>}))} theme={{name:portfolio.theme?.name||"minimal",background:palette.bg||"#ffffff",text:palette.text||"#202331",primary:palette.primary||"#7659e8",secondary:palette.secondary||"#f1eefb",accent:palette.accent||"#42ac88",font:custom?.font||"Arial",radius:custom?.radius||12}} consent={jar.get("portfolio_analytics_consent")?.value||""}/>}

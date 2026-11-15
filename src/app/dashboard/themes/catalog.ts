@@ -1,0 +1,24 @@
+export type Theme={id:string;name:string;category:string;description:string;layout:string;font:string;colors:{bg:string;primary:string;secondary:string;accent:string;text:string};radius:number};
+const t=(id:string,name:string,category:string,description:string,layout:string,font:string,colors:string[],radius=12):Theme=>({id,name,category,description,layout,font,radius,colors:{bg:colors[0],primary:colors[1],secondary:colors[2],accent:colors[3],text:colors[4]}});
+export const catalog:Theme[]=[
+t("minimal-clean","Quiet Minimal","Minimal","A calm, typography-led canvas.","minimal","Inter",["#faf9f6","#242421","#e9e7e2","#897a62","#242421"],2),
+t("modern-grid","Modern Grid","Modern","A crisp modular grid with bold hierarchy.","grid","Inter",["#f6f8fc","#4659dc","#e5e9ff","#29a98c","#19213a"]),
+t("corporate-blue","Clearpoint","Corporate","Confident structure for a polished profile.","corporate","Arial",["#f4f7fb","#164c83","#e3edf7","#3a9b9b","#172d43"],6),
+t("creative-canvas","Open Canvas","Creative","Playful asymmetry and expressive color.","creative","Georgia",["#fff7ef","#ed684b","#f9d9c9","#7051d8","#342b38"],24),
+t("developer-terminal","Terminal One","Developer","A focused terminal-inspired developer profile.","terminal","monospace",["#101914","#83d67b","#1c2c23","#e7b95e","#e2efe5"],8),
+t("engineering-blueprint","Blueprint","Engineering","Precise lines and technical annotations.","blueprint","Arial",["#edf5fb","#235f91","#d4e5f2","#e2984a","#18344b"],4),
+t("academic-journal","The Journal","Academic","An elegant academic CV and research layout.","journal","Georgia",["#fbfaf5","#3d4d3d","#eeede5","#9c7847","#2c302a"],2),
+t("designer-portfolio","Forma","Designer","An image-first, gallery-driven portfolio.","gallery","Arial",["#f6f3f0","#d65e4b","#e9e3dd","#20201f","#242321"],10),
+t("data-science","Signal & Noise","Data Science","Analytical structure with clear data accents.","data","Arial",["#f1f8f8","#087f8c","#d7efed","#ed9c42","#15363a"],9),
+t("ai-lab","Neural Studio","AI & ML","A subtle luminous look for AI builders.","neural","Arial",["#11101b","#a78bfa","#252039","#4dd6bb","#f2efff"],16),
+t("cybersecurity","Cipher","Cybersecurity","A high-contrast security operations aesthetic.","cipher","monospace",["#10151a","#52d6a2","#1d2930","#f2bc58","#e7f0ed"],5),
+t("business-strategy","Northstar","Business","Balanced, editorial business storytelling.","business","Georgia",["#f8f6f0","#2d5363","#e7e4d8","#bd8952","#252d30"],8),
+t("freelancer","Independent","Freelancer","Warm personal branding with a clear contact path.","freelance","Arial",["#fff7f1","#b95838","#f3e4da","#488d78","#382922"],16),
+t("dark-portfolio","After Hours","Dark","Deep charcoal and a restrained violet glow.","dark","Inter",["#111218","#9b83ff","#22232e","#66d4b1","#f0eff8"],14),
+t("light-portfolio","Daylight","Light","Bright, airy and easy to scan.","light","Arial",["#ffffff","#495c76","#f1f4f8","#50a987","#202b3b"],10),
+t("glass-studio","Prism","Glassmorphism","Layered translucent surfaces and soft gradients.","glass","Arial",["#eef1fb","#6356bd","#ffffff99","#dd7eac","#24223a"],20),
+t("editorial","Field Notes","Editorial","A magazine-like story with generous whitespace.","editorial","Georgia",["#fbf8f0","#24231f","#ebe6dc","#a54e37","#282722"],0),
+t("elegant","Atelier","Elegant","Refined serif typography and delicate details.","elegant","Georgia",["#faf7f4","#755d68","#eee5e7","#b79a70","#382f33"],14),
+t("gradient","Spectrum","Gradient","A vibrant gradient-led personal brand.","gradient","Arial",["#f6f3ff","#7856db","#e8ddff","#e76c93","#25213c"],18),
+t("executive","Executive Brief","Professional Executive","A composed executive profile with strong credentials.","executive","Georgia",["#f5f6f7","#173552","#e3e9ee","#b18a50","#172838"],4),
+];

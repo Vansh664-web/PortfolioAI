@@ -1,0 +1,237 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(cuid())
+  email String @unique
+  passwordHash String
+  emailVerifiedAt DateTime?
+  verificationToken String? @unique
+  resetToken String? @unique
+  resetExpiresAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  profile StudentProfile?
+  sessions Session[]
+  conversations AIConversation[]
+  resumes Resume[]
+  analytics PortfolioAnalytics[]
+  notifications Notification[]
+  goals CareerGoal[]
+  portfolios Portfolio[]
+}
+model Session {
+  id String @id @default(cuid())
+  tokenHash String @unique
+  expiresAt DateTime
+  userId String
+  user User @relation(fields:[userId], references:[id], onDelete:Cascade)
+  createdAt DateTime @default(now())
+  @@index([userId, expiresAt])
+}
+model StudentProfile {
+  id String @id @default(cuid())
+  userId String @unique
+  user User @relation(fields:[userId], references:[id], onDelete:Cascade)
+  fullName String?
+  displayName String?
+  photoUrl String?
+  college String?
+  degree String?
+  branch String?
+  academicYear String?
+  graduationYear Int?
+  careerInterests String[] @default([])
+  socialLinks Json?
+  onboardingStep Int @default(0)
+  onboardingComplete Boolean @default(false)
+  headline String?
+  about String?
+  updatedAt DateTime @updatedAt
+  education Education[]
+  skills Skill[]
+  projects Project[]
+  experience Experience[]
+  certifications Certification[]
+  achievements Achievement[]
+  portfolios Portfolio[]
+}
+model Education {
+  id String @id @default(cuid())
+  profileId String
+  profile StudentProfile @relation(fields:[profileId], references:[id], onDelete:Cascade)
+  institution String
+  degree String?
+  branch String?
+  academicYear String?
+  graduationYear Int?
+  coursework String[] @default([])
+  createdAt DateTime @default(now())
+}
+model Skill {
+  id String @id @default(cuid())
+  profileId String
+  profile StudentProfile @relation(fields:[profileId], references:[id], onDelete:Cascade)
+  name String
+  category String?
+  proficiency String?
+  @@unique([profileId, name])
+}
+model Project {
+  id String @id @default(cuid())
+  profileId String
+  profile StudentProfile @relation(fields:[profileId], references:[id], onDelete:Cascade)
+  name String
+  problem String?
+  description String?
+  category String?
+  imageUrl String?
+  technologies String[] @default([])
+  duration String?
+  teamMembers String[] @default([])
+  contribution String?
+  keyResults String[] @default([])
+  githubUrl String?
+  demoUrl String?
+  published Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Experience {
+  id String @id @default(cuid())
+  profileId String
+  profile StudentProfile @relation(fields:[profileId], references:[id], onDelete:Cascade)
+  title String
+  organization String?
+  kind String?
+  description String?
+  startDate DateTime?
+  endDate DateTime?
+}
+model Certification {
+  id String @id @default(cuid())
+  profileId String
+  profile StudentProfile @relation(fields:[profileId], references:[id], onDelete:Cascade)
+  name String
+  issuer String?
+  issuedAt DateTime?
+  credentialUrl String?
+}
+model Achievement {
+  id String @id @default(cuid())
+  profileId String
+  profile StudentProfile @relation(fields:[profileId], references:[id], onDelete:Cascade)
+  title String
+  organization String?
+  description String?
+  achievedAt DateTime?
+}
+model Portfolio {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields:[userId], references:[id], onDelete:Cascade)
+  profileId String
+  profile StudentProfile @relation(fields:[profileId], references:[id], onDelete:Cascade)
+  slug String @unique
+  headline String?
+  about String?
+  objective String?
+  seoTitle String?
+  seoDescription String?
+  ogImage String?
+  customDomain String? @unique
+  publishedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  sections PortfolioSection[]
+  theme PortfolioTheme?
+}
+model PortfolioSection {
+  id String @id @default(cuid())
+  portfolioId String
+  portfolio Portfolio @relation(fields:[portfolioId], references:[id], onDelete:Cascade)
+  kind String
+  title String
+  content Json?
+  position Int @default(0)
+  visible Boolean @default(true)
+}
+model PortfolioTheme {
+  id String @id @default(cuid())
+  portfolioId String @unique
+  portfolio Portfolio @relation(fields:[portfolioId], references:[id], onDelete:Cascade)
+  name String @default("minimal")
+  settings Json?
+}
+model AIConversation {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields:[userId], references:[id], onDelete:Cascade)
+  kind String @default("interview")
+  status String @default("in_progress")
+  currentStep Int @default(0)
+  answers Json @default("{}")
+  generatedContent Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  messages AIMessage[]
+  @@index([userId, status])
+}
+model AIMessage {
+  id String @id @default(cuid())
+  conversationId String
+  conversation AIConversation @relation(fields:[conversationId], references:[id], onDelete:Cascade)
+  role String
+  content String
+  createdAt DateTime @default(now())
+}
+model Resume {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields:[userId], references:[id], onDelete:Cascade)
+  name String
+  fileUrl String?
+  content Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model PortfolioAnalytics {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields:[userId], references:[id], onDelete:Cascade)
+  event String
+  path String?
+  visitorHash String?
+  referrer String?
+  device String?
+  occurredAt DateTime @default(now())
+  @@index([userId, occurredAt])
+  @@index([userId, visitorHash, occurredAt])
+  @@index([userId, event, occurredAt])
+}
+model Notification {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields:[userId], references:[id], onDelete:Cascade)
+  title String
+  body String
+  readAt DateTime?
+  createdAt DateTime @default(now())
+}
+model CareerGoal {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields:[userId], references:[id], onDelete:Cascade)
+  title String
+  industry String?
+  dreamJob String?
+  details String?
+  targetDate DateTime?
+  createdAt DateTime @default(now())
+}
