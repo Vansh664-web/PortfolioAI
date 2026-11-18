@@ -21,4 +21,12 @@ t("editorial","Field Notes","Editorial","A magazine-like story with generous whi
 t("elegant","Atelier","Elegant","Refined serif typography and delicate details.","elegant","Georgia",["#faf7f4","#755d68","#eee5e7","#b79a70","#382f33"],14),
 t("gradient","Spectrum","Gradient","A vibrant gradient-led personal brand.","gradient","Arial",["#f6f3ff","#7856db","#e8ddff","#e76c93","#25213c"],18),
 t("executive","Executive Brief","Professional Executive","A composed executive profile with strong credentials.","executive","Georgia",["#f5f6f7","#173552","#e3e9ee","#b18a50","#172838"],4),
+t("pastel-blush","Blush Paper","Pastel","Soft blush and cream for gentle, personal storytelling.","pastel","Inter",["#fdf6f3","#c96a7a","#f7e2dc","#8fb8a8","#3b2f33"],18),
+t("sage-botanical","Sage & Linen","Botanical","Calm organic tones with room to breathe.","botanical","Georgia",["#f7f6ef","#5c7a5b","#e8ebdd","#c08a4e","#2f3a2e"],14),
+t("brutalist-bold","Hard Edge","Brutalist","Loud type, thick rules and zero apology.","brutalist","Arial",["#f4f1e8","#111111","#e8e2d2","#ffd23f","#111111"],0),
+t("retro-sunset","Golden Hour","Retro","Warm 70s hues with an easy, analog feel.","retro","Georgia",["#fbf0e0","#b4552d","#f3ddc3","#6f7f4e","#3a2a20"],22),
+t("luxury-noir","Noir & Gold","Luxury","Deep charcoal, fine gold rules and quiet confidence.","luxury","Georgia",["#141414","#c9a227","#232323","#e8e0cc","#f0ece1"],2),
+t("photo-aperture","Aperture","Photography","Image-first and cinematic, built to frame your work.","photography","Arial",["#0f1113","#f5f5f5","#1c2024","#7fd1c1","#ececec"],4),
+t("scrapbook-collage","Collage Club","Playful","Cut-paper energy with a warm, personal touch.","scrapbook","Trebuchet MS",["#fffaf0","#d9544f","#ffe9c9","#4b8fb8","#2e2a26"],10),
+t("neon-arcade","Neon Arcade","Neon","Electric accents for bold, future-facing profiles.","neon","Inter",["#0b0d17","#22d3ee","#161a2b","#f472b6","#eaf2ff"],12),
 ];

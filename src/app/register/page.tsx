@@ -1,3 +1,2 @@
-import AuthForm from "@/app/(auth)/auth-form";
-import "@/app/(auth)/auth.css";
-export default function Page(){return <AuthForm mode="register"/>}
+import { redirect } from "next/navigation";
+export default function Page(){redirect("/dashboard")}

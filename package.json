@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed:dev": "node --env-file=.env scripts/seed-dev-account.mjs",
+    "test:ai": "node --env-file=.env scripts/test-xai.mjs"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.1",
